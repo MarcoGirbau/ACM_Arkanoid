@@ -18,7 +18,6 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	int anchoLadrillo = 27;
 	int altoLadrillo = 15;
 	
-	static int puntuacion = 0;
 	Marcador marcador = new Marcador (120,40);
 	
 	public void init()
@@ -43,7 +42,6 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			pelota1.muevete(this);
 			//pelota2.muevete(this);
 			pause(4);
-			puntuacion += 1;
 		}
 	}
 	
@@ -59,7 +57,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			for(int i=j; i<14; i++)
 			{
 				Ladrillo miLadrillo = new Ladrillo
-						(anchoLadrillo*i - anchoLadrillo*j/2, altoLadrillo*j + altoLadrillo, anchoLadrillo, altoLadrillo, Color.orange);
+						(anchoLadrillo*i - anchoLadrillo*j/2, altoLadrillo*j + altoLadrillo, anchoLadrillo, altoLadrillo, Color.ORANGE);
 				add(miLadrillo);
 				pause(7);
 			}

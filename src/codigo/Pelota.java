@@ -84,14 +84,13 @@ public class Pelota extends GOval
 			if(auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)
 			{
 				yVelocidad *= -1;
-				
 			}
 			else if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX)
 			{
 				xVelocidad *= -1;
-				
 			}
 			_arkanoid.remove(auxiliar);
+			_arkanoid.marcador.actualizaMarcador(1);
 			noHaChocado = false;
 		}
 		else if(auxiliar instanceof Barra)
