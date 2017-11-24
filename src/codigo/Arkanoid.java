@@ -2,11 +2,16 @@ package codigo;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
-
 /*
- * Autor: Marco Girbau
+* Autor: Marco Girbau
  * 
  * El Arkanoid pero orientado a objetos chachis
+ * 
+ * Cosas a hacer: 
+ * - Arreglar rebote con ladrillos de la nueva version
+ * - Rebote con el cursor sea mas progresiva
+ * - Crear Sistema partida: Vidas + cambiar nivel
+ * - Sistema bonus
  */
 import acm.graphics.*;
 public class Arkanoid extends acm.program.GraphicsProgram
@@ -17,9 +22,12 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	
 	int anchoLadrillo = 27;
 	int altoLadrillo = 15;
+	int numeroLadrillos = 14;
 	
 	Marcador marcador = new Marcador (120,40);
 	MarcadorVidas marcavida = new MarcadorVidas (120,40);
+	
+	GLabel perder = new GLabel ("TU PIERDES!");
 	public void init()
 	{
 		addMouseListeners();
@@ -30,6 +38,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		add(barra1, 0, getHeight()*0.80);
 		
 		dibujaNivel01();
+		//dibujaNivel02();
 		add(marcavida, getWidth() - 410 , getHeight() - 100);
 		add(marcador, getWidth() - 130, getHeight() - 100);
 		//marcador.dibuja(this);
@@ -38,11 +47,15 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		}
 	public void run()
 	{
-		while(true)
+		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
 		{
 			pelota1.muevete(this);
 			//pelota2.muevete(this);
 			pause(4);
+		}
+		if(MarcadorVidas.vidas <= 0)
+		{
+			add(perder, getWidth()/2.5, getHeight()/2);
 		}
 	}
 	
@@ -59,6 +72,19 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			{
 				Ladrillo miLadrillo = new Ladrillo
 						(anchoLadrillo*i - anchoLadrillo*j/2, altoLadrillo*j + altoLadrillo, anchoLadrillo, altoLadrillo, Color.ORANGE);
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
+	private void dibujaNivel02()
+	{
+		for(int j=0; j<14; j++)
+		{
+			for(int i=j; i<14; i++)
+			{
+				Ladrillo miLadrillo = new Ladrillo
+						(anchoLadrillo*i + altoLadrillo*j, altoLadrillo*j + anchoLadrillo, anchoLadrillo, altoLadrillo, Color.GREEN);
 				add(miLadrillo);
 				pause(7);
 			}

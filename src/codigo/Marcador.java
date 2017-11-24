@@ -21,10 +21,10 @@ public class Marcador extends GRect
 		texto.setFont(new Font("Times New Roman", Font.BOLD, 15));
 	}
 	//public void dibuja(Arkanoid _arkanoid)
-	{
+	//{
 		//_arkanoid.add(this, getX(), getY());
 		//_arkanoid.add(texto, getX() + 10, getY() + 30);
-	}
+	//}
 	public void actualizaMarcador(int puntos)
 	{
 		puntuacion += puntos;

@@ -6,7 +6,7 @@ import acm.graphics.GRect;
 public class MarcadorVidas extends GRect
 {
 	GLabel textovida = new GLabel("");
-	int vidas = 3;
+	static int vidas = 3;
 	public MarcadorVidas(double width, double height) 
 	{
 		super(width, height);

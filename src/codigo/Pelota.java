@@ -56,6 +56,21 @@ public class Pelota extends GOval
 		{
 			yVelocidad *= -1;
 		}
+		if(this.getY() >= _arkanoid.getHeight())
+		{
+			if(MarcadorVidas.vidas <=3 && MarcadorVidas.vidas > 2)
+			{
+				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			}
+			if(MarcadorVidas.vidas < 3 && MarcadorVidas.vidas > 1)
+			{
+				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			}
+			if(MarcadorVidas.vidas < 2 && MarcadorVidas.vidas >=1)
+			{
+				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			}
+		}
 		if (chequeacolision(getX(), getY(), _arkanoid))//chequeo la esquina superior izquierda
 		{
 			if (chequeacolision(getX() + getWidth(), getY(), _arkanoid))//chequeo la esquina superior derecha
