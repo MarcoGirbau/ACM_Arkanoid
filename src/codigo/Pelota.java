@@ -90,12 +90,22 @@ public class Pelota extends GOval
 				xVelocidad *= -1;
 			}
 			_arkanoid.remove(auxiliar);
-			_arkanoid.marcador.actualizaMarcador(1);
+			_arkanoid.marcador.actualizaMarcador(+1);
 			noHaChocado = false;
 		}
 		else if(auxiliar instanceof Barra)
 		{
-			yVelocidad *= -1;
+			//Se va a modificar el rebote de la bola con el cursor para que no sea siempre igual
+			//Calculo la posicion X del punto central de la bola
+			double centroBola =  getX() + getWidth()/2;
+			if(centroBola > auxiliar.getX() + auxiliar.getWidth()/3 && centroBola < auxiliar.getX() + 2 * auxiliar.getWidth()/3)
+			{
+				yVelocidad *= -1;
+			}
+			else
+			{
+				yVelocidad = -0.5;
+			}
 			noHaChocado = false;
 		}
 		//add(ganar, getWidth()/2.5, getHeight()/2);

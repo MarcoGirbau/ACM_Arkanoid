@@ -10,12 +10,14 @@ public class Marcador extends GRect
 {
 	GLabel texto = new GLabel("");
 	int puntuacion = 0;
+	//GLabel ganar = new GLabel ("TU GANAS!");
+	//add(ganar, getWidth()/2.5, getHeight()/2);
 	public Marcador(double width, double height) 
 	{
 		super(width, height);
 		setFilled(true);
 		setFillColor(Color.WHITE);
-		texto.setLabel("Puntuacion: ");
+		texto.setLabel("Puntuacion: " + puntuacion);
 		texto.setFont(new Font("Times New Roman", Font.BOLD, 15));
 	}
 	//public void dibuja(Arkanoid _arkanoid)

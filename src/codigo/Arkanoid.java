@@ -19,7 +19,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	int altoLadrillo = 15;
 	
 	Marcador marcador = new Marcador (120,40);
-	
+	MarcadorVidas marcavida = new MarcadorVidas (120,40);
 	public void init()
 	{
 		addMouseListeners();
@@ -30,10 +30,11 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		add(barra1, 0, getHeight()*0.80);
 		
 		dibujaNivel01();
-		
+		add(marcavida, getWidth() - 410 , getHeight() - 100);
 		add(marcador, getWidth() - 130, getHeight() - 100);
 		//marcador.dibuja(this);
 		add(marcador.texto, getWidth() - 125, getHeight() - 75);
+		add(marcavida.textovida, getWidth() - 370 , getHeight() - 75);
 		}
 	public void run()
 	{
