@@ -11,15 +11,14 @@ import acm.graphics.*;
  * Cosas a hacer: 
  * - Arreglar rebote con ladrillos de la nueva version
  * - Rebote con el cursor sea mas progresiva
- * - Crear Sistema partida: Vidas + cambiar nivel
+ * - Crear Sistema partida: Vidas + cambiar nivel (HECHO)
  * - Sistema bonus
  */
 
 public class Arkanoid extends acm.program.GraphicsProgram
 {
 	Pelota pelota1 = new Pelota(15,15, Color.BLUE);
-	//Pelota pelota2 = new Pelota(20,20, Color.GREEN);
-	Barra barra1 = new Barra(400, 15, Color.RED);
+	Barra barra1 = new Barra(80, 15, Color.RED);
 	
 	int anchoLadrillo = 27;
 	int altoLadrillo = 15;
@@ -36,37 +35,38 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		setSize(400, 600);
 		
 		add(pelota1, 0, getHeight()*0.65 - pelota1.getHeight());
-		//add(pelota2, 0, getHeight()*0.75 - pelota2.getHeight());
 		add(barra1, 0, getHeight()*0.80);
 		
 		dibujaNivel01();
-		//dibujaNivel02();
 		add(marcavida, getWidth() - 410 , getHeight() - 100);
 		add(marcador, getWidth() - 130, getHeight() - 100);
-		//marcador.dibuja(this);
 		add(marcador.texto, getWidth() - 125, getHeight() - 75);
 		add(marcavida.textovida, getWidth() - 370 , getHeight() - 75);
-		}
+	}
 	public void run()
 	{
-		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3 && Marcador.puntuacion < 105)
+		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
 		{
 			pelota1.muevete(this);
-			//pelota2.muevete(this);
-			pause(4);
+			pause(3);
+			if(Marcador.puntuacion >104 && Marcador.puntuacion <106)
+			{
+				pelota1.setLocation(getHeight()/2, getHeight()/2);
+				dibujaNivel02();
+				while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
+				{
+					pelota1.muevete(this);
+					if(Marcador.puntuacion >272 && Marcador.puntuacion <274)
+					{
+						add(ganar, getWidth()/2.5, getHeight()/2);
+					}
+				}
+			}	
 		}
 		if(MarcadorVidas.vidas <= 0)
 		{
 			add(perder, getWidth()/2.5, getHeight()/2);
 		}
-		//if(Marcador.puntuacion >=105)
-	//	{
-			//add(ganar, getWidth()/2.5, getHeight()/2);
-	//	}
-		if(Marcador.puntuacion >=105)
-		{
-			dibujaNivel02();
-		}	
 	}
 	
 	public void mouseMoved (MouseEvent _evento)
@@ -74,7 +74,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		barra1.mueveBarra(_evento.getX(), getWidth());
 	}
 	
-	private void dibujaNivel01()
+	private void dibujaNivel01()//105
 	{
 		for(int j=0; j<14; j++)
 		{
@@ -87,14 +87,14 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			}
 		}
 	}
-	private void dibujaNivel02()
+	private void dibujaNivel02()//168
 	{
-		for(int j=0; j<14; j++)
+		for(int i=0; i<12; i++)
 		{
-			for(int i=j; i<14; i++)
+			for(int j=0; j<14; j++)
 			{
 				Ladrillo miLadrillo = new Ladrillo
-						(anchoLadrillo*i + altoLadrillo*j, altoLadrillo*j + anchoLadrillo, anchoLadrillo, altoLadrillo, Color.GREEN);
+						(j * anchoLadrillo, i * altoLadrillo, anchoLadrillo, altoLadrillo, Color.GREEN);
 				add(miLadrillo);
 				pause(7);
 			}

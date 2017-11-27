@@ -19,7 +19,7 @@ public class Pelota extends GOval
 	 */
 	double xVelocidad = 1; //Velocidad de la bola en el eje X
 	double yVelocidad = -1; //Velocidad de la bola en el eje Y
-	
+
 	public Pelota(double _ancho, double _alto)
 	{
 		super(_ancho, _alto);
@@ -44,35 +44,34 @@ public class Pelota extends GOval
 	 */
 	public void muevete(Arkanoid _arkanoid)
 	{
-			//chequea si ha chocado con las paredes izq o derecha
+		//chequea si ha chocado con las paredes izq o derecha
 		if(this.getX() + this.getWidth() >= _arkanoid.getWidth() || this.getX() < 0)
 		{
 			xVelocidad *= -1;
 		}	
-			//chequea si ha chocado con el techo
+		//chequea si ha chocado con el techo
 		if(this.getY() < 0)
 		{
 			yVelocidad *= -1;
 		}
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=3)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
-				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+			_arkanoid.marcavida.actualizaMarcadorVidas(-1);
 		}
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=2)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
-				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+			_arkanoid.marcavida.actualizaMarcadorVidas(-1);
 		}
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=1)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
-				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
+			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+			_arkanoid.marcavida.actualizaMarcadorVidas(-1);
 		}
-		if(Marcador.puntuacion >=105)
+		if(Marcador.puntuacion >272 && Marcador.puntuacion <274)
 		{
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
-			_arkanoid.marcador.actualizaMarcador(-105);
 		}
 		if (chequeacolision(getX(), getY(), _arkanoid))//chequeo la esquina superior izquierda
 		{
@@ -82,7 +81,7 @@ public class Pelota extends GOval
 				{
 					if (chequeacolision(getX() + getWidth(), getY() + getHeight(), _arkanoid))//chequeo la esquina inferior derecha
 					{
-						
+
 					}
 				}
 			}
@@ -96,7 +95,7 @@ public class Pelota extends GOval
 		boolean noHaChocado = true;
 		GObject auxiliar;
 		auxiliar = _arkanoid.getElementAt(posX, posY);
-		
+
 		if(auxiliar instanceof Ladrillo)
 		{
 			if(auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)
@@ -126,7 +125,6 @@ public class Pelota extends GOval
 			}
 			noHaChocado = false;
 		}
-		//add(ganar, getWidth()/2.5, getHeight()/2);
 		return noHaChocado;
 	}
 }
