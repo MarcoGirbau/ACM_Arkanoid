@@ -9,7 +9,7 @@ import acm.graphics.GRect;
 public class Marcador extends GRect
 {
 	GLabel texto = new GLabel("");
-	int puntuacion = 0;
+	 static int puntuacion = 0;
 	//GLabel ganar = new GLabel ("TU GANAS!");
 	//add(ganar, getWidth()/2.5, getHeight()/2);
 	public Marcador(double width, double height) 

@@ -2,6 +2,7 @@ package codigo;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
+import acm.graphics.*;
 /*
 * Autor: Marco Girbau
  * 
@@ -13,12 +14,12 @@ import java.awt.event.MouseEvent;
  * - Crear Sistema partida: Vidas + cambiar nivel
  * - Sistema bonus
  */
-import acm.graphics.*;
+
 public class Arkanoid extends acm.program.GraphicsProgram
 {
 	Pelota pelota1 = new Pelota(15,15, Color.BLUE);
 	//Pelota pelota2 = new Pelota(20,20, Color.GREEN);
-	Barra barra1 = new Barra(60, 15, Color.RED);
+	Barra barra1 = new Barra(400, 15, Color.RED);
 	
 	int anchoLadrillo = 27;
 	int altoLadrillo = 15;
@@ -28,6 +29,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	MarcadorVidas marcavida = new MarcadorVidas (120,40);
 	
 	GLabel perder = new GLabel ("TU PIERDES!");
+	GLabel ganar = new GLabel ("TU GANAS!");	
 	public void init()
 	{
 		addMouseListeners();
@@ -47,7 +49,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		}
 	public void run()
 	{
-		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
+		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3 && Marcador.puntuacion < 105)
 		{
 			pelota1.muevete(this);
 			//pelota2.muevete(this);
@@ -57,6 +59,14 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		{
 			add(perder, getWidth()/2.5, getHeight()/2);
 		}
+		//if(Marcador.puntuacion >=105)
+	//	{
+			//add(ganar, getWidth()/2.5, getHeight()/2);
+	//	}
+		if(Marcador.puntuacion >=105)
+		{
+			dibujaNivel02();
+		}	
 	}
 	
 	public void mouseMoved (MouseEvent _evento)

@@ -19,8 +19,6 @@ public class Pelota extends GOval
 	 */
 	double xVelocidad = 1; //Velocidad de la bola en el eje X
 	double yVelocidad = -1; //Velocidad de la bola en el eje Y
-	//GLabel ganar = new GLabel ("TU GANAS!");
-	//GLabel perder = new GLabel ("TU PIERDES!");
 	
 	public Pelota(double _ancho, double _alto)
 	{
@@ -56,20 +54,25 @@ public class Pelota extends GOval
 		{
 			yVelocidad *= -1;
 		}
-		if(this.getY() >= _arkanoid.getHeight())
+		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=3)
 		{
-			if(MarcadorVidas.vidas <=3 && MarcadorVidas.vidas > 2)
-			{
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
-			}
-			if(MarcadorVidas.vidas < 3 && MarcadorVidas.vidas > 1)
-			{
+		}
+		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=2)
+		{
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
-			}
-			if(MarcadorVidas.vidas < 2 && MarcadorVidas.vidas >=1)
-			{
+		}
+		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=1)
+		{
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 				_arkanoid.marcavida.actualizaMarcadorVidas(-1);
-			}
+		}
+		if(Marcador.puntuacion >=105)
+		{
+			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+			_arkanoid.marcador.actualizaMarcador(-105);
 		}
 		if (chequeacolision(getX(), getY(), _arkanoid))//chequeo la esquina superior izquierda
 		{
@@ -124,7 +127,6 @@ public class Pelota extends GOval
 			noHaChocado = false;
 		}
 		//add(ganar, getWidth()/2.5, getHeight()/2);
-		//add(perder, getWidth()/2.5, getHeight()/2);
 		return noHaChocado;
 	}
 }
