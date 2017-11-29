@@ -9,8 +9,8 @@ import acm.graphics.*;
  * El Arkanoid pero orientado a objetos chachis
  * 
  * Cosas a hacer: 
- * - Arreglar rebote con ladrillos de la nueva version
- * - Rebote con el cursor sea mas progresiva
+ * - Arreglar rebote con ladrillos de la nueva version ("Hecho")
+ * - Rebote con el cursor sea mas progresiva (HECHO)
  * - Crear Sistema partida: Vidas + cambiar nivel (HECHO)
  * - Sistema bonus
  */
@@ -20,7 +20,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	Pelota pelota1 = new Pelota(15,15, Color.BLUE);
 	Barra barra1 = new Barra(80, 15, Color.RED);
 	
-	int anchoLadrillo = 27;
+	int anchoLadrillo = 25;
 	int altoLadrillo = 15;
 	int numeroLadrillos = 14;
 	
@@ -38,6 +38,8 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		add(barra1, 0, getHeight()*0.80);
 		
 		dibujaNivel01();
+		
+		setBackground(Color.GRAY);
 		add(marcavida, getWidth() - 410 , getHeight() - 100);
 		add(marcador, getWidth() - 130, getHeight() - 100);
 		add(marcador.texto, getWidth() - 125, getHeight() - 75);
@@ -53,10 +55,12 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			{
 				pelota1.setLocation(getHeight()/2, getHeight()/2);
 				dibujaNivel02();
+				setBackground(Color.PINK);
+				dibujaNivel011();
 				while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
 				{
 					pelota1.muevete(this);
-					if(Marcador.puntuacion >272 && Marcador.puntuacion <274)
+					if(Marcador.puntuacion >349 && Marcador.puntuacion <351)
 					{
 						add(ganar, getWidth()/2.5, getHeight()/2);
 					}
@@ -74,27 +78,40 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		barra1.mueveBarra(_evento.getX(), getWidth());
 	}
 	
-	private void dibujaNivel01()//105
+	private void dibujaNivel01()//105 ladrillos
 	{
 		for(int j=0; j<14; j++)
 		{
 			for(int i=j; i<14; i++)
 			{
 				Ladrillo miLadrillo = new Ladrillo
-						(anchoLadrillo*i - anchoLadrillo*j/2, altoLadrillo*j + altoLadrillo, anchoLadrillo, altoLadrillo, Color.ORANGE);
+						(anchoLadrillo*i - anchoLadrillo*j/2 + 17, altoLadrillo*j + altoLadrillo, anchoLadrillo, altoLadrillo, Color.ORANGE);
 				add(miLadrillo);
 				pause(7);
 			}
 		}
 	}
-	private void dibujaNivel02()//168
+	private void dibujaNivel02()//140 + Segundo nivel de ladrillo
 	{
-		for(int i=0; i<12; i++)
+		for(int i=0; i<10; i++)
 		{
 			for(int j=0; j<14; j++)
 			{
 				Ladrillo miLadrillo = new Ladrillo
-						(j * anchoLadrillo, i * altoLadrillo, anchoLadrillo, altoLadrillo, Color.GREEN);
+						(j * anchoLadrillo + 17, i * altoLadrillo, anchoLadrillo, altoLadrillo, Color.GREEN);
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
+	private void dibujaNivel011()//Segundo nivel de ladrillo 
+	{
+		for(int j=0; j<14; j++)
+		{
+			for(int i=j; i<14; i++)
+			{
+				Ladrillo miLadrillo = new Ladrillo
+						(anchoLadrillo*i + 17 , altoLadrillo, anchoLadrillo, altoLadrillo, Color.RED);
 				add(miLadrillo);
 				pause(7);
 			}

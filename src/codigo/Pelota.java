@@ -69,7 +69,7 @@ public class Pelota extends GOval
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 			_arkanoid.marcavida.actualizaMarcadorVidas(-1);
 		}
-		if(Marcador.puntuacion >272 && Marcador.puntuacion <274)
+		if(Marcador.puntuacion >349 && Marcador.puntuacion <351)
 		{
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 		}
@@ -118,6 +118,10 @@ public class Pelota extends GOval
 			if(centroBola > auxiliar.getX() + auxiliar.getWidth()/3 && centroBola < auxiliar.getX() + 2 * auxiliar.getWidth()/3)
 			{
 				yVelocidad *= -1;
+			}
+			else if(centroBola > auxiliar.getX()/2 + auxiliar.getWidth()/3 && centroBola < auxiliar.getX()/2 + 2 * auxiliar.getWidth()/3)
+			{
+				yVelocidad = -0.75;
 			}
 			else
 			{
