@@ -1,18 +1,18 @@
 package codigo;
-
 import java.awt.Color;
 import java.awt.Font;
-
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
-
+/*
+ * Autor: Marco Girbau
+ * 
+ * La clase Marcador sirve para especificar la puntuacion 
+ */
 public class Marcador extends GRect
 {
 	GLabel texto = new GLabel("");
-	 static int puntuacion = 0;
-	//GLabel ganar = new GLabel ("TU GANAS!");
-	//add(ganar, getWidth()/2.5, getHeight()/2);
-	public Marcador(double width, double height) 
+	static int puntuacion = 0; //Estado base de la puntuacion
+	public Marcador(double width, double height) //Constructor Marcador con ciertas especificaciones para el texto
 	{
 		super(width, height);
 		setFilled(true);
@@ -20,12 +20,7 @@ public class Marcador extends GRect
 		texto.setLabel("Puntuacion: " + puntuacion);
 		texto.setFont(new Font("Times New Roman", Font.BOLD, 15));
 	}
-	//public void dibuja(Arkanoid _arkanoid)
-	//{
-		//_arkanoid.add(this, getX(), getY());
-		//_arkanoid.add(texto, getX() + 10, getY() + 30);
-	//}
-	public void actualizaMarcador(int puntos)
+	public void actualizaMarcador(int puntos)//Esto permite que la puntuacion vaya aumentando o disminuyendo
 	{
 		puntuacion += puntos;
 		texto.setLabel("Puntuacion: " + puntuacion);

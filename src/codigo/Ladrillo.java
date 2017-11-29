@@ -1,15 +1,11 @@
 package codigo;
-
 import java.awt.Color;
-
 import acm.graphics.GRect;
 
 /**
- * 
  * @author Marco Girbau
  * 
  * La clase Ladrillo sirve para dibujar los ladrillos del juego 
- *
  */
 public class Ladrillo extends GRect
 {
@@ -21,9 +17,8 @@ public class Ladrillo extends GRect
 	 * @param height
 	 * @param _color
 	 * 
-	 * futuros cambios: que admita numero de golpes
 	 */
-	public Ladrillo(double x, double y, double width, double height, Color _color) 
+	public Ladrillo(double x, double y, double width, double height, Color _color)  //Constructor Ladrillo
 	{
 		super(x, y, width, height);
 		setFilled(true);
