@@ -11,8 +11,12 @@ import acm.graphics.GRect;
 public class Marcador extends GRect
 {
 	GLabel texto = new GLabel("");
-	static int puntuacion = 0; //Estado base de la puntuacion
-	public Marcador(double width, double height) //Constructor Marcador con ciertas especificaciones para el texto
+	
+	//Estado base de la puntuacion
+	static int puntuacion = 0;													
+	
+	//Constructor Marcador con ciertas especificaciones para el texto
+	public Marcador(double width, double height) 								
 	{
 		super(width, height);
 		setFilled(true);
@@ -20,7 +24,9 @@ public class Marcador extends GRect
 		texto.setLabel("Puntuacion: " + puntuacion);
 		texto.setFont(new Font("Times New Roman", Font.BOLD, 15));
 	}
-	public void actualizaMarcador(int puntos)//Esto permite que la puntuacion vaya aumentando o disminuyendo
+	
+	//Esto permite que la puntuacion vaya aumentando o disminuyendo
+	public void actualizaMarcador(int puntos)
 	{
 		puntuacion += puntos;
 		texto.setLabel("Puntuacion: " + puntuacion);

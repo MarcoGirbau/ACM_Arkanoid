@@ -14,10 +14,13 @@ import acm.graphics.GImage;
  */
 public class Bonus extends GRect
 {
+	//Constructor Bonus
 	public Bonus(double _x, double _y) 
 	{
 		super(_x, _y);
 		setVisible(false);
 	}
+	
+	//Especificamos una nueva GImage
 	GImage bonus = new GImage("img/JorgeCisneros.jpg");
 }

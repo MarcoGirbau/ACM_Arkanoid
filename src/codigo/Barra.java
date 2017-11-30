@@ -16,7 +16,9 @@ public class Barra extends GRect
 	 * @param height - el alto del cursor
 	 * @param _color - color del cursor
 	 */
-	public Barra(double width, double height, Color _color) //Constructor Barra
+	
+	//Constructor Barra
+	public Barra(double width, double height, Color _color) 
 	{
 		super(width, height);
 		setFilled(true);
@@ -31,7 +33,7 @@ public class Barra extends GRect
 	{
 		if(posX + getWidth() < anchoPantalla)
 		{
-			setLocation(posX, getY());//Hace referencia a la barra
+			setLocation(posX, getY());											//Hace referencia a la barra
 		}
 	}
 

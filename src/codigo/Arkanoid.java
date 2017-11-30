@@ -12,17 +12,17 @@ import acm.graphics.GImage;
  * El Arkanoid pero orientado a objetos chachis
  * 
  * Cosas a hacer: 
- * - Arreglar rebote con ladrillos de la nueva version (Cuando aparece la segunda bola atraviesa algunos ladrillos)
+ * - Arreglar rebote con ladrillos de la nueva version (HECHO)
  * - Rebote con el cursor sea mas progresiva (HECHO)
  * - Crear Sistema partida: Vidas + cambiar nivel (HECHO)
- * - Sistema bonus (1 Bonus hecho, 1 bola extra en el segundo nivel)
- * - Imagenes incluidas
+ * - Sistema bonus (1 Bonus hecho que sale en todos los niveles, 1 bola extra en el tercer nivel)
+ * - Imagenes incluidas (HECHO)
  */
 public class Arkanoid extends acm.program.GraphicsProgram
 {
 	//Aqui aparecen todos los integers que aparecen a lo largo del codigo
 	int altopelotaybarra = 12;
-	int anchoBarra = 360;
+	int anchoBarra = 80;
 	int anchoLadrillo = 25;
 	int altoLadrillo = 15;
 	int numeroLadrillos = 14;
@@ -50,24 +50,26 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	//Aqui aparece el texto de los diferentes GLabels 
 	GLabel perder = new GLabel ("TU PIERDES!");
 	GLabel ganar = new GLabel ("TU GANAS!");	
+
 	public void init()
 	{
-		addMouseListeners();// Añadimos el control del mouse para el Arkanoid
+		addMouseListeners();																// Añadimos el control del mouse para el Arkanoid
 
-		setSize(400, 600); //Especificamos el tamaño del mapa
+		setSize(400, 600); 																	//Especificamos el tamaño del mapa
 
 		//Añadimos objetos 
 		add(pelota1, 0, (int)(getHeight()*0.65 - pelota1.getHeight()));
 		add(barra1, 0, getHeight()*0.80);
 
-		dibujaNivel01(); //Dibujamos el nivel de ladrillos 1
+		dibujaNivel01();																	//Dibujamos el nivel de ladrillos 1
+
 		int posicionBonusX = r.nextInt(espacioBonus-tamanobonus);
 		int posicionBonusY = r.nextInt(espacioBonus-tamanobonus);
 
-		add(bonus1.bonus,posicionBonusX,posicionBonusY);//Añadimos el rectangulo en el lugar random
-		add(bonus1,posicionBonusX,posicionBonusY);//Añadimos la imagen bonus en un lugar Random
+		add(bonus1.bonus,posicionBonusX,posicionBonusY);									//Añadimos el rectangulo en el lugar random
+		add(bonus1,posicionBonusX,posicionBonusY);											//Añadimos la imagen bonus en un lugar Random
 
-		setBackground(Color.GRAY);//Cambiamos el color del fondo
+		setBackground(Color.GRAY);															//Cambiamos el color del fondo
 
 		//Añadimos por ultimo los marcadores tanto de texto como de su respectivo cuadro
 		add(marcavida, getWidth() - 410 , getHeight() - textoaltura);
@@ -78,43 +80,84 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	}
 	public void run()
 	{
-		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)//Mientras suceda lo que indica el while se hara
+		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)							//Mientras suceda lo que indica el while se hara
 		{
 			//barra1.mueveBarra((int)pelota1.getX(), getWidth());
 			pelota1.muevete(this);
-			pause(0.00000001); //Especifica la velocidad
-			if(Marcador.puntuacion >104 && Marcador.puntuacion <106)//Si sucede lo que indica el if ocurrira lo del interior 
+			pause(3); 																		//Especifica la velocidad
+
+			if(Marcador.puntuacion >104 && Marcador.puntuacion <106)						//Si sucede lo que indica el if ocurrira lo del interior 
 			{
-				pelota1.setLocation(getHeight()/2, getHeight()/2); //Colocamos de nuevo la pelota al cambiar de nivel
-				dibujaNivel02(); //Dibujamos el nivel 2
-				add(pelota2, 0, (int)(getHeight()*0.65 - pelota2.getHeight()));
-				setBackground(Color.PINK); //Cambiamos el color de fondo
-				dibujaNivel011(); //Añadimos el segundo puesto de ladrillos
-				while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)//Si sucede lo que indica el if ocurrira lo del interior 
+				pelota1.setLocation(getHeight()/2, getHeight()/2); 							//Colocamos de nuevo la pelota al cambiar de nivel
+
+				dibujaNivel02();															//Dibujamos el nivel 2
+
+				setBackground(Color.PINK); 													//Cambiamos el color de fondo
+
+				dibujaNivel011(); 															//Añadimos el segundo puesto de ladrillos
+
+				//Añadimos los bonus con sus Random respectivos
+				int posicionBonusX = r.nextInt(espacioBonus-tamanobonus);					
+				int posicionBonusY = r.nextInt(espacioBonus-tamanobonus);
+				add(bonus1.bonus,posicionBonusX,posicionBonusY);							//Añadimos el rectangulo en el lugar random
+				add(bonus1,posicionBonusX,posicionBonusY);									//Añadimos la imagen bonus en un lugar Random
+
+				while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)					//Si sucede lo que indica el if ocurrira lo del interior 
 				{
 					pelota1.muevete(this);
-					pause(4);
-					pelota2.muevete(this);
-					pause(4);
-					if(Marcador.puntuacion < 258 && Marcador.puntuacion > 260)//Si sucede lo que indica el if ocurrira lo del interior
+					pause(3);
+
+					if(Marcador.puntuacion > 258 && Marcador.puntuacion < 260)				//Si sucede lo que indica el if ocurrira lo del interior
 					{
-						add(ganar, getWidth()/2.5, getHeight()/2);//Aparecera un texto en el lugar indicado
+						pelota1.setLocation(getHeight()/2, getHeight()/2); 					//Colocamos de nuevo la pelota al cambiar de nivel
+
+						//Dibujamos los niveles con sus respectivos ladrillos extras
+						dibujaNivel03();
+						dibujaNivel012();
+						dibujaNivel013();
+
+						//Añadimos el bonus y la pelota 2 
+						add(bonus1.bonus,posicionBonusX,posicionBonusY);					//Añadimos el rectangulo en el lugar random
+						add(bonus1,posicionBonusX,posicionBonusY);							//Añadimos la imagen bonus en un lugar Random
+						add(pelota2, 0, (int)(getHeight()*0.65 - pelota2.getHeight()));			
+
+						setBackground(Color.orange);										//Cambiamos el color de fondo
+
+						while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
+						{
+							//Movemos las pelotas
+							pelota1.muevete(this);
+							pelota2.muevete(this);
+							pause(4);
+
+							if(Marcador.puntuacion > 375 && Marcador.puntuacion < 377)		//Si sucede lo que indica el if ocurrira lo del interior
+							{
+								add(ganar, getWidth()/2.5, getHeight()/2);					//Aparecera un texto en el lugar indicado
+
+								//Colocamos las pelotas en el centro y las borramos, junto a la barra.
+								pelota1.setLocation(getHeight()/2, getHeight()/2);
+								pelota2.setLocation(getHeight()/2, getHeight()/2);
+								remove(pelota1);
+								remove(pelota2);
+								remove(barra1);
+							}
+						}
 					}
 				}
 			}	
 		}
-		if(MarcadorVidas.vidas <= 0)//Si sucede lo que indica el if ocurrira lo del interior
+		if(MarcadorVidas.vidas <= 0)														//Si sucede lo que indica el if ocurrira lo del interior
 		{
-			add(perder, getWidth()/2.5, getHeight()/2);//Aparecera un texto en el lugar indicado
+			add(perder, getWidth()/2.5, getHeight()/2);										//Aparecera un texto en el lugar indicado
 		}
 	}
 
-	public void mouseMoved (MouseEvent _evento)//Especificamos el evento del mouse con la barra
+	public void mouseMoved (MouseEvent _evento)												//Especificamos el evento del mouse con la barra
 	{
 		barra1.mueveBarra(_evento.getX(), getWidth());
 	}
 
-	private void dibujaNivel01()//105 ladrillos
+	private void dibujaNivel01()															//105 ladrillos
 	{
 		for(int j=0; j<14; j++)
 		{
@@ -127,7 +170,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			}
 		}
 	}
-	private void dibujaNivel02()//140 + Segundo nivel de ladrillo
+	private void dibujaNivel02()															//140 + Segundo nivel de ladrillo
 	{
 		for(int i=0; i<10; i++)
 		{
@@ -140,7 +183,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			}
 		}
 	}
-	private void dibujaNivel011()//Segundo nivel de ladrillo = 14 
+	private void dibujaNivel011()															//Segundo nivel de ladrillo = 14 
 	{
 		for(int j=0; j<1; j++)
 		{
@@ -148,6 +191,45 @@ public class Arkanoid extends acm.program.GraphicsProgram
 			{
 				Ladrillo miLadrillo = new Ladrillo
 						(anchoLadrillo*i + 17 , altoLadrillo, anchoLadrillo, altoLadrillo, Color.RED);
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
+	private void dibujaNivel03()															//Tercer nivel de ladrillo  = 90 + 
+	{
+		for(int j=0; j<10; j++)
+		{
+			for(int i=j; i<14; i++)
+			{
+				Ladrillo miLadrillo = new Ladrillo
+						(anchoLadrillo*i - anchoLadrillo*j/2 + 17, j * altoLadrillo, anchoLadrillo, altoLadrillo, Color.CYAN);
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
+	private void dibujaNivel012()															//Segundo nivel de ladrillo 2 = 13
+	{
+		for(int j=0; j<1; j++)
+		{
+			for(int i=j; i<13; i++)
+			{
+				Ladrillo miLadrillo = new Ladrillo
+						(anchoLadrillo*i + 30 , altoLadrillo, anchoLadrillo, altoLadrillo, Color.RED);
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
+	private void dibujaNivel013()															//Segundo nivel de ladrillo 3 = 9 
+	{
+		for(int j=0; j<1; j++)
+		{
+			for(int i=j; i<9; i++)
+			{
+				Ladrillo miLadrillo = new Ladrillo
+						(anchoLadrillo*i + 80 , altoLadrillo + 60, anchoLadrillo, altoLadrillo, Color.RED);
 				add(miLadrillo);
 				pause(7);
 			}

@@ -18,7 +18,7 @@ public class Ladrillo extends GRect
 	 * @param _color
 	 * 
 	 */
-	public Ladrillo(double x, double y, double width, double height, Color _color)  //Constructor Ladrillo
+	public Ladrillo(double x, double y, double width, double height, Color _color) 		 //Constructor Ladrillo
 	{
 		super(x, y, width, height);
 		setFilled(true);
