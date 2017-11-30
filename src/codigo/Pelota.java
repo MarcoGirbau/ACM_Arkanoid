@@ -1,5 +1,7 @@
 package codigo;
 import java.awt.Color;
+
+import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
@@ -39,7 +41,7 @@ public class Pelota extends GOval
 		this.setFillColor(_color);
 		this.setFilled(true);
 	}
-	/**
+	/*
 	 * Se encarga de mover a la pelota y chequear si ha habido colision
 	 */
 	public void muevete(Arkanoid _arkanoid)
@@ -99,11 +101,11 @@ public class Pelota extends GOval
 		if(auxiliar instanceof Ladrillo)
 			//Especificamos lo que ocurre cuando tocamos un ladrillo
 		{
-			if(auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)
+			if(auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY || auxiliar.getY() + auxiliar.getWidth() == posY)
 			{
 				yVelocidad *= -1;
 			}
-			else if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX)
+			if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX ||  auxiliar.getX() + auxiliar.getHeight() == posX)
 			{
 				xVelocidad *= -1;
 			}
@@ -137,6 +139,7 @@ public class Pelota extends GOval
 			_arkanoid.anchoBarra += 40; //Cambiamos el integer anchoBarra
 			_arkanoid.barra1.setSize(_arkanoid.anchoBarra, _arkanoid.barra1.getHeight()); //Cambiamos el tamaño de la barra
 			_arkanoid.remove(auxiliar);//Quitamos el bonus ya que se ha chocado 
+			_arkanoid.remove(((Bonus) auxiliar).bonus);
 			noHaChocado = false;
 		}
 		return noHaChocado;

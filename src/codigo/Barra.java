@@ -34,5 +34,5 @@ public class Barra extends GRect
 			setLocation(posX, getY());//Hace referencia a la barra
 		}
 	}
-	
+
 }
