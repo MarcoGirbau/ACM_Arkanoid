@@ -51,40 +51,34 @@ public class Pelota extends GOval
 		{
 			xVelocidad *= -1;
 		}
-		
+
 		//chequea si ha chocado con el techo
 		if(this.getY() < 0)
 		{
 			yVelocidad *= -1;
 		}
-		
+
 		//Si sucede lo que indica el if ocurrira lo del interior 
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=3)					//Si sucede lo que indica el if ocurrira lo del interior 
 		{
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight()); //Cambiamos la posicion de la bola al perder vidas
 			_arkanoid.marcavida.actualizaMarcadorVidas(-1);//Restamos 1 vida
 		}
-		
+
 		//Si sucede lo que indica el if ocurrira lo del interior 
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=2)					//Si sucede lo que indica el if ocurrira lo del interior 
 		{
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight()); //Cambiamos la posicion de la bola al perder vidas
 			_arkanoid.marcavida.actualizaMarcadorVidas(-1);//Restamos 1 vida
 		}
-		
+
 		//Si sucede lo que indica el if ocurrira lo del interior 
 		if(this.getY() >= _arkanoid.getHeight() && MarcadorVidas .vidas >=1)					//Si sucede lo que indica el if ocurrira lo del interior 
 		{
 			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight()); //Cambiamos la posicion de la bola al perder vidas
 			_arkanoid.marcavida.actualizaMarcadorVidas(-1);//Restamos 1 vida
 		}
-		
-		//Si sucede lo que indica el if ocurrira lo del interior 
-		if(Marcador.puntuacion >379 && Marcador.puntuacion <381)			 
-		{
-			setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight()); //Colocamos la bola en el centro porque has ganado
-		}
-		
+
 		//chequeo la esquina superior izquierda
 		if (chequeacolision(getX(), getY(), _arkanoid))
 		{
@@ -127,20 +121,20 @@ public class Pelota extends GOval
 			_arkanoid.marcador.actualizaMarcador(+1);											//Añadimos un punto 
 			noHaChocado = false;
 		}
-		
+
 		//Especificamos lo que ocurre cuando tocas la barra
 		else if(auxiliar instanceof Barra)
 		{
 			//Se va a modificar el rebote de la bola con el cursor para que no sea siempre igual
 			//Calculo la posicion X del punto central de la bola
 			double centroBola =  getX() + getWidth()/2;
-			
+
 			//Centro
 			if(centroBola > auxiliar.getX() + auxiliar.getWidth()/3 && centroBola < auxiliar.getX() + 2 * auxiliar.getWidth()/3)	
 			{
 				yVelocidad *= -1;
 			}
-			
+
 			//No tan centro
 			else if(centroBola > auxiliar.getX()/2 + auxiliar.getWidth()/3 && centroBola < auxiliar.getX()/2 + 2 * auxiliar.getWidth()/3)	
 			{
@@ -153,14 +147,19 @@ public class Pelota extends GOval
 			}
 			noHaChocado = false;
 		}
-		
+
 		//Especificamos que ocurre cuando tocas el Bonus
 		else if(auxiliar instanceof Bonus)
 		{
 			_arkanoid.anchoBarra += 20; 														//Cambiamos el integer anchoBarra
 			_arkanoid.barra1.setSize(_arkanoid.anchoBarra, _arkanoid.barra1.getHeight()); 		//Cambiamos el tamaño de la barra
 			_arkanoid.remove(auxiliar);															//Quitamos el bonus ya que se ha chocado 
-			_arkanoid.remove(((Bonus) auxiliar).bonus);
+			//_arkanoid.remove(((BonusImg) auxiliar));
+			noHaChocado = false;
+		}
+		else if (auxiliar instanceof BonusImg)
+		{
+			_arkanoid.remove(auxiliar);
 			noHaChocado = false;
 		}
 		return noHaChocado;

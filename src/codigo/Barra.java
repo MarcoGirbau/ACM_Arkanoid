@@ -16,7 +16,7 @@ public class Barra extends GRect
 	 * @param height - el alto del cursor
 	 * @param _color - color del cursor
 	 */
-	
+
 	//Constructor Barra
 	public Barra(double width, double height, Color _color) 
 	{

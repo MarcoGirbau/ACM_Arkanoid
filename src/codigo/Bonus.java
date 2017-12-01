@@ -14,13 +14,20 @@ import acm.graphics.GImage;
  */
 public class Bonus extends GRect
 {
+
 	//Constructor Bonus
 	public Bonus(double _x, double _y) 
 	{
 		super(_x, _y);
-		setVisible(false);
+		setVisible(true);
 	}
-	
-	//Especificamos una nueva GImage
-	GImage bonus = new GImage("img/JorgeCisneros.jpg");
+
+	//Se esta intentando hacer que se mueva el bonus de lado a lado en el eje X.
+	public void mueveBonus(int posX, int anchoPantalla)
+	{
+		if(posX + getWidth() < anchoPantalla)
+		{
+			setLocation(posX, getY());											//Hace referencia al Bonus
+		}
+	}
 }

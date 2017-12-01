@@ -13,10 +13,10 @@ import acm.graphics.GRect;
 public class MarcadorVidas extends GRect
 {
 	GLabel textovida = new GLabel("");
-	
+
 	//Vidas Iniciales
 	static int vidas = 3; 
-	
+
 	//Constructor MarcadorVidas
 	public MarcadorVidas(double width, double height) 
 	{
@@ -26,7 +26,7 @@ public class MarcadorVidas extends GRect
 		textovida.setLabel("          " + vidas);
 		textovida.setFont(new Font("Times New Roman", Font.BOLD, 25));
 	}
-	
+
 	//Esto permite que las vidas vayan aumentando o disminuyendo
 	public void actualizaMarcadorVidas(int vida)
 	{

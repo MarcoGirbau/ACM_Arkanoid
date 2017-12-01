@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 import acm.graphics.*;
 import acm.util.RandomGenerator;
-import acm.graphics.GImage;
 /*
  * Autor: Marco Girbau
  * 
@@ -38,7 +37,10 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	Pelota pelota2 = new Pelota(altopelotaybarra, altopelotaybarra, Color.MAGENTA);
 	Barra barra1 = new Barra(anchoBarra, altopelotaybarra, Color.RED);
 	GObject Heart = new GImage("img/Heart.png", 21, 21);
-	Bonus bonus1 = new Bonus(10,20);
+	Bonus bonus1 = new Bonus(20,20);
+
+	//Especificamos una nueva GImage
+	BonusImg bonusfoto = new BonusImg ("img/JorgeCisneros.jpg");
 
 	//Aqui aparece el generador Randomizado
 	RandomGenerator r = new RandomGenerator();
@@ -66,7 +68,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 		int posicionBonusX = r.nextInt(espacioBonus-tamanobonus);
 		int posicionBonusY = r.nextInt(espacioBonus-tamanobonus);
 
-		add(bonus1.bonus,posicionBonusX,posicionBonusY);									//Añadimos el rectangulo en el lugar random
+		add(bonusfoto,posicionBonusX,posicionBonusY);								//Añadimos el rectangulo en el lugar random
 		add(bonus1,posicionBonusX,posicionBonusY);											//Añadimos la imagen bonus en un lugar Random
 
 		setBackground(Color.GRAY);															//Cambiamos el color del fondo
@@ -82,11 +84,14 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	{
 		while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)							//Mientras suceda lo que indica el while se hara
 		{
-			//barra1.mueveBarra((int)pelota1.getX(), getWidth());
+			//Movemos los Bonus
+			bonus1.mueveBonus((int)barra1.getX(), getWidth());
+			bonusfoto.mueveBonusImg((int)barra1.getX(), getWidth());
+
 			pelota1.muevete(this);
 			pause(3); 																		//Especifica la velocidad
 
-			if(Marcador.puntuacion >104 && Marcador.puntuacion <106)						//Si sucede lo que indica el if ocurrira lo del interior 
+			if(Marcador.puntuacion == 105)													//Si sucede lo que indica el if ocurrira lo del interior 
 			{
 				pelota1.setLocation(getHeight()/2, getHeight()/2); 							//Colocamos de nuevo la pelota al cambiar de nivel
 
@@ -99,15 +104,19 @@ public class Arkanoid extends acm.program.GraphicsProgram
 				//Añadimos los bonus con sus Random respectivos
 				int posicionBonusX = r.nextInt(espacioBonus-tamanobonus);					
 				int posicionBonusY = r.nextInt(espacioBonus-tamanobonus);
-				add(bonus1.bonus,posicionBonusX,posicionBonusY);							//Añadimos el rectangulo en el lugar random
+				add(bonusfoto,posicionBonusX,posicionBonusY);								//Añadimos el rectangulo en el lugar random
 				add(bonus1,posicionBonusX,posicionBonusY);									//Añadimos la imagen bonus en un lugar Random
 
 				while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)					//Si sucede lo que indica el if ocurrira lo del interior 
 				{
+					//Movemos los Bonus
+					bonus1.mueveBonus((int)barra1.getX(), getWidth());
+					bonusfoto.mueveBonusImg((int)barra1.getX(), getWidth());
+
 					pelota1.muevete(this);
 					pause(3);
 
-					if(Marcador.puntuacion > 258 && Marcador.puntuacion < 260)				//Si sucede lo que indica el if ocurrira lo del interior
+					if(Marcador.puntuacion == 259 )											//Si sucede lo que indica el if ocurrira lo del interior
 					{
 						pelota1.setLocation(getHeight()/2, getHeight()/2); 					//Colocamos de nuevo la pelota al cambiar de nivel
 
@@ -117,7 +126,7 @@ public class Arkanoid extends acm.program.GraphicsProgram
 						dibujaNivel013();
 
 						//Añadimos el bonus y la pelota 2 
-						add(bonus1.bonus,posicionBonusX,posicionBonusY);					//Añadimos el rectangulo en el lugar random
+						add(bonusfoto,posicionBonusX,posicionBonusY);						//Añadimos el rectangulo en el lugar random
 						add(bonus1,posicionBonusX,posicionBonusY);							//Añadimos la imagen bonus en un lugar Random
 						add(pelota2, 0, (int)(getHeight()*0.65 - pelota2.getHeight()));			
 
@@ -125,12 +134,16 @@ public class Arkanoid extends acm.program.GraphicsProgram
 
 						while(MarcadorVidas.vidas >= 1 && MarcadorVidas.vidas <= 3)
 						{
+							//Movemos los Bonus
+							bonus1.mueveBonus((int)barra1.getX(), getWidth());
+							bonusfoto.mueveBonusImg((int)barra1.getX(), getWidth());
+
 							//Movemos las pelotas
 							pelota1.muevete(this);
 							pelota2.muevete(this);
 							pause(4);
 
-							if(Marcador.puntuacion > 375 && Marcador.puntuacion < 377)		//Si sucede lo que indica el if ocurrira lo del interior
+							if(Marcador.puntuacion == 376)									//Si sucede lo que indica el if ocurrira lo del interior
 							{
 								add(ganar, getWidth()/2.5, getHeight()/2);					//Aparecera un texto en el lugar indicado
 
@@ -155,6 +168,14 @@ public class Arkanoid extends acm.program.GraphicsProgram
 	public void mouseMoved (MouseEvent _evento)												//Especificamos el evento del mouse con la barra
 	{
 		barra1.mueveBarra(_evento.getX(), getWidth());
+	}
+
+	public void mueveBonusfoto(int posX, int anchoPantalla)
+	{
+		if(posX + getWidth() < anchoPantalla)
+		{
+			setLocation(posX, getY());														//Hace referencia al Bonus
+		}
 	}
 
 	private void dibujaNivel01()															//105 ladrillos
